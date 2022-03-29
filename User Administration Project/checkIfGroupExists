@@ -1,0 +1,20 @@
+function checkIfGroupExists
+{
+read -p "Please enter group name or GID: " groupname
+
+#check if GID exists
+check_GID=$(grep :$groupname: /etc/group &>/dev/null; echo $?)
+#check if group name exists
+check_name=$(grep ^$groupname: /etc/group &>/dev/null ; echo $?)
+
+while [ $check_GID -ne 0 ] && [ $check_name -ne 0 ]
+do
+	echo "The group $groupname does not exist"
+        read -p "Please enter group name or GID: " groupname
+	#check if GID exists
+	check_GID=$(grep :$groupname: /etc/group &>/dev/null; echo $?)
+	#check if group name exists
+	check_name=$(grep ^$groupname: /etc/group &>/dev/null ; echo $?)
+done
+
+}

@@ -1,0 +1,5 @@
+checkIfUserExists
+replaceNameWithUID
+
+usermod -U $username
+echo "User has been enabled successfully"

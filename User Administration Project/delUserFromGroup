@@ -1,0 +1,8 @@
+checkIfUserExists
+replaceNameWithUID
+
+checkIfGroupExists
+replaceGroupWithGID
+
+gpasswd -d $username $groupname
+echo User $username has been removed successfully from group $groupname

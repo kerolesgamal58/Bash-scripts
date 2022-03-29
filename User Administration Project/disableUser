@@ -1,0 +1,5 @@
+checkIfUserExists
+replaceNameWithUID
+
+usermod -L $username
+echo "User has been disabled successfully"

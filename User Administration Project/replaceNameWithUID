@@ -1,0 +1,8 @@
+function replaceNameWithUID
+{
+if [[ $username =~ ^[0-9]+$ ]]
+then
+        username=$(id $username | cut -d "(" -f 2 | cut -d ")" -f 1)
+fi
+
+}

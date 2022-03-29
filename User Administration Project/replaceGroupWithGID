@@ -1,0 +1,8 @@
+function replaceGroupWithGID
+{
+if [[ $groupname =~ ^[0-9]+$ ]]
+then
+        groupname=$(grep :$groupname: /etc/group | cut -d : -f 1)
+fi
+
+}
