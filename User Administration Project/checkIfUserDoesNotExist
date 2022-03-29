@@ -1,0 +1,12 @@
+function checkIfUserDoesNotExist
+{
+read -p "Please enter user login name or UID: " username
+check=$(id $username &>/dev/null; echo $?)
+while [ $check -eq 0 ]
+do
+        echo "This user $username is already exists"
+        read -p "Please enter user login name or UID: " username
+        check=$(id $username &>/dev/null; echo $?)
+done
+
+}

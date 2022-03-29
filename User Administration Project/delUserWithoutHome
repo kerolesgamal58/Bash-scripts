@@ -1,0 +1,5 @@
+checkIfUserExists
+replaceNameWithUID
+
+userdel $username
+echo User $username has been deleted successfully

@@ -1,0 +1,29 @@
+read -p "Please enter username: " username
+
+while true
+do
+	#Check if user already exists
+	check=$(id $username &>/dev/null; echo $?)
+	
+	if [ $check -eq 0 ]
+	then
+		echo "This user $username is already exists"
+		read -p "Please enter username: " username
+		continue
+	fi
+
+	#Check if user is valid
+	checkIfSuccess=$(useradd $username &>/dev/null; echo $?)
+	
+	if [ $checkIfSuccess -ne 0 ]
+	then
+        	echo "Invalid username"
+		read -p "Please enter a valid username: " username
+		continue
+	fi
+	break
+done
+
+read -p "Please enter your password: " password
+echo $password | passwd --stdin $username
+echo User $username has been added successfully

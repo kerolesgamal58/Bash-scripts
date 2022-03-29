@@ -1,0 +1,21 @@
+checkIfUserExists
+replaceNameWithUID
+
+#user info
+user_all=$(sed -n "/^$username:/p" /etc/passwd)
+user_full_name=$(echo $user_all | cut -d : -f 5)
+user_dir=$(echo $user_all | cut -d : -f 6)
+user_shell=$(echo $user_all | cut -d : -f 7)
+echo -e "Login: $username\t\tName: $user_full_name"
+echo -e "Directory: $user_dir\t\tShell: $user_shell"
+
+#Login info
+last_login_time=$(last --time full | grep "^$username\s" | head -n 1 | sed -e 's/  */ /g' | cut -d " " -f 4-7)
+time_zone=$(timedatectl status | grep "Time zone" | cut -d "(" -f 2 | cut -d "," -f 1)
+from=$(last --time full | grep "^Keroles\s" | head -n 1 | sed -e 's/  */ /g' | cut -d " " -f 2)
+hostname=$(hostname)
+
+echo "Last login $last_login_time ($time_zone) on $from from $hostname"
+
+#Password info
+chage --list $username

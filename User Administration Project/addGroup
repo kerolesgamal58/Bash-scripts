@@ -1,0 +1,20 @@
+read -p "Please enter group name: " groupname
+
+#Check if group already exists
+check=$(cat /etc/group | cut -d : -f 1 | grep ^$groupname$ &>/dev/null ; echo $?)
+while [ $check -eq 0 ]
+do
+	echo "This group $groupname is already exists"
+	read -p "Please enter a group name: " groupname
+	check=$(cat /etc/group | cut -d : -f 1 | grep ^$groupname$ &>/dev/null ; echo $?)
+done
+
+#Check if group is valid
+checkIfSuccess=$(groupadd $groupname &>/dev/null; echo $?)
+while [ $checkIfSuccess -ne 0 ]
+do
+        echo "Invalid Group name"
+	read -p "Please enter a valid Group name: " groupname
+	checkIfSuccess=$(groupadd $groupname &>/dev/null; echo $?)
+done
+echo Group $groupname has been added successfully

@@ -1,0 +1,9 @@
+checkIfUserExists
+replaceNameWithUID
+
+checkIfGroupExists
+replaceGroupWithGID
+
+usermod -aG $groupname $username
+echo User $username has been added successfully from group $groupname
+
